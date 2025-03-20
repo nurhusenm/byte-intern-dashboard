@@ -1,19 +1,20 @@
 "use client";
-import { FaChartSimple, FaMedapps } from "react-icons/fa6";
-import { CiFileOn } from "react-icons/ci";
+import { FiBarChart2 } from "react-icons/fi";
+import { TfiMedallAlt } from "react-icons/tfi";
+import { FaRegFile } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: "Dashboard", href: "/dashboard", icon: FaChartSimple },
+  { name: "Dashboard", href: "/dashboard", icon: FiBarChart2 },
   {
     name: "Skill Test",
     href: "/dashboard/skill-test",
-    icon: FaMedapps,
+    icon: TfiMedallAlt,
   },
-  { name: "internship", href: "/dashboard/internship", icon: CiFileOn },
+  { name: "internship", href: "/dashboard/internship", icon: FaRegFile },
 ];
 
 export default function NavLinks() {
@@ -28,14 +29,29 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              "flex h-[50px] items-center gap-3 pl-6 py-2.5 font-sans text-gray-700 font-medium transition-colors hover:bg-sky-50",
+              "flex h-16 items-center gap-4 pl-6 pr-12 rounded-r-full font-sans text-gray-700 font-medium transition-all hover:bg-sky-50",
               {
-                "bg-blue-100 text-indigo-600": pathname === link.href,
+                "bg-gray-100": pathname === link.href,
               }
             )}
           >
-            <LinkIcon className="w-5 h-5" />
-            <span>{link.name}</span>
+            <LinkIcon
+              className={clsx(
+                "w-5 h-5 transition-colors ",
+                // Custom styles for each icon
+                link.name === "Dashboard" && "stroke-[2.5px]",
+                link.name === "internship" && " w-5 h-8",
+                pathname === link.href && "text-blue-700 w-7 h-9"
+              )}
+            />
+            <span
+              className={clsx(
+                "font-medium leading-[32px]",
+                pathname === link.href && "text-blue-500"
+              )}
+            >
+              {link.name}
+            </span>
           </Link>
         );
       })}
