@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose, onSave }) => {
   const validateForm = () => {
     let newErrors = {};
     if (!rank) newErrors.rank = "Required! | Should be a number";
-    if (percentile > 100) newErrors.percentile = "percentile must be below 100";
+    if (percentile > 100) newErrors.percentile = "percentile must be under 100";
     if (!percentile) newErrors.percentile = "Percentile is required!";
     if (!score) newErrors.score = "Score is required!";
     setErrors(newErrors);
